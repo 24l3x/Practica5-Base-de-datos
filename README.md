@@ -28,12 +28,26 @@
 ##### Nivel 1
 ![Leve](https://github.com/user-attachments/assets/3dd90922-4dce-42cd-9501-4a1853754215)
 
+    $env:NIVEL_POBLADO="leve"; docker-compose up --build
+
 
 ##### Nivel 2
 ![Moderado](https://github.com/user-attachments/assets/fe9993fc-2878-4957-be36-4da08ed8a647)
 
+    $env:NIVEL_POBLADO="moderado"; docker-compose up --build
+
 ##### Nivel 3
 <img width="682" height="280" alt="Masivo" src="https://github.com/user-attachments/assets/645b9258-ff2f-422a-93b5-05cf1a4a0d68" />
+
+    $env:NIVEL_POBLADO="masivo"; docker-compose up --build
+
+###### Si el poblador se traba o no llena la base de datos correctamente, reinicialo
+
+    docker-compose restart poblador
+
+###### Asi mismo recuerda que cada vez que cargues un nuevo poblador debes bajar el docker compose Y BORRAR los volumenes
+
+    docker-compose down -v
 
 #### Tabla Comparativa
 |  Metrica | Nivel 1 | Nivel 2 | Nivel 3  |
