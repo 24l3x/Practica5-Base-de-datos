@@ -1,5 +1,8 @@
 # Practica5-Base-de-datos
 ## Edición de valores de una base de datos relacional empleando DML
+### Ejercicios:
+#### 1. ✅ 2. ✅ 3.❌ 4.❌
+
 ***Orden***
 	
 	practica5/
