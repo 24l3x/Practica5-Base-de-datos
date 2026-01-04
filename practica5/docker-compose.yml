@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: tienda_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tienda_abarrotes
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+    ports:
+      - "3307:3306" 
+    volumes:
+      - mysql_data_practica5:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d
+    networks:
+      - red_practica5
+    command: --default-authentication-plugin=mysql_native_password --local-infile=1
+    restart: always
+
+ 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: tienda_admin
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+    ports:
+      - "8085:80"
+    depends_on:
+      - db
+    networks:
+      - red_practica5
+
+
+  poblador:
+    build: .
+    container_name: script_poblador
+    environment:
+      DB_HOST: db
+      DB_USER: user
+      DB_PASSWORD: pass
+      DB_NAME: tienda_abarrotes
+      NIVEL_POBLADO: ${NIVEL_POBLADO:-ninguno} 
+    volumes:
+      - ./scripts:/app/scripts
+    depends_on:
+      - db
+    networks:
+      - red_practica5
+
+networks:
+  red_practica5:
+    driver: bridge
+
+volumes:
+  mysql_data_practica5:
+    driver: local
